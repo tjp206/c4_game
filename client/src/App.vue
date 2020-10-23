@@ -2,7 +2,7 @@
   <div id="app">
     <h1>C-4 Time To Go Booom!!!!</h1>
 
-    <h3 class="player_turn"> PLayer name</h3>
+    <h3 class="player_turn"> Player Name:</h3>
 
     <div class="game">
       <table>

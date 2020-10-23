@@ -19,5 +19,8 @@ db.c4.insert([
         wins: 2,
         draws: 2,
         losses: 1
+    },
+    {
+        player_1: "5f91aad51a12c3fd360da6c9"
     }
 ])
