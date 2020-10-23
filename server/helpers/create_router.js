@@ -8,10 +8,10 @@ const createRouter = function(collection) {
     // INDEX
     router.get('/', (req, res) => {
         collection
-            .find()
-            .toArray()
-            .then((docs) => res.json(docs))
-            .catch((err) => {
+        .find()
+        .toArray()
+        .then((docs) => res.json(docs))
+        .catch((err) => {
                 console.error(err);
                 res.status(500);
                 res.json({ status: 500, error: err });
@@ -60,8 +60,8 @@ const createRouter = function(collection) {
         const id = req.params.id
         const updatePlayer = req.body
         collection.findOneAndUpdate(
-            { _id: ObjectID(id) }
-            { $set: updatePlayer }
+            { _id: ObjectID(id) },
+            { $set: updatePlayer },
             { returnOriginal: false }
         )
             .then((result) => res.json(result.value))
@@ -71,8 +71,6 @@ const createRouter = function(collection) {
                 res.json({ status: 500, error: err });
             })
     })
-
-
 
     return router;
 
