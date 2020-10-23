@@ -72,6 +72,29 @@ const createRouter = function(collection) {
             })
     })
 
+    // CREATE GAME
+    router.post('/', (req, res) => {
+        const newGame = req.body
+        collection.insertOne(newGame)
+            .then((result) => res.json(result.ops[0]))
+            .catch((err) => {
+                console.error(err);
+                res.status(500);
+                res.json({ status: 500, error: err });
+            })
+    })
+
+    // UPDATE GAME
+    router.put('/:id', (req, res) => {
+        const id = req.params.id
+        const updateGame = req.body
+        collection.findOneAndUpdate(
+            { _id: ObjectID(id) },
+            { $set: updateGame },
+            { returnOriginal: false }
+        )
+    })
+
     return router;
 
 }
