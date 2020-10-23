@@ -2,7 +2,7 @@
   <div id="app">
     <h1>C-4 Time To Go Booom!!!!</h1>
 
-    <h3 class="player_turn"></h3>
+    <h3 class="player_turn"> PLayer name</h3>
 
     <div class="game">
       <table>
@@ -116,8 +116,6 @@ h1{
   border-style:solid;
   border-color: black;
   border-radius: 50%;
-
-
 }
 
 .reset{
@@ -132,6 +130,5 @@ h1{
   text-align: center;
   cursor: pointer;
   box-shadow: 3px 3px black;
-
 }
 </style>
