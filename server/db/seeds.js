@@ -19,5 +19,5 @@ db.c4.insertMany([
         wins: 2,
         draws: 2,
         losses: 1
-    }
+    },
 ])
