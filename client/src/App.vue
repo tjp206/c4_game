@@ -7,7 +7,7 @@
     <div class="game">
       <table>
       <tr>
-        <td class="slot"></td>
+        <td class="slot" :v-on:click="changeColor"></td>
         <td class="slot"></td>
         <td class="slot"></td>
         <td class="slot"></td>
@@ -73,87 +73,101 @@ import GameFunction from './components/GameFunction'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  },
+    HelloWorld,
+},
 
-  mounted(){
-    let tableRow = document.getElementsByTagName('tr')
-    var tableCell = document.getElementsByTagName('td')
-    let tableSlot = document.querySelector('.slot')
-    
+mounted(){
+let tableCell = document.getElementsByTagName('td');
+let tableRow = document.getElementsByTagName('tr');
+let tableSlot = document.querySelector('.slot');
+let playerTurn = document.querySelector('.player-turn');
 
-    for (let i=0; i < tableCell.length; i++){
-        tableCell[i].addEventListener('click', (e) => {
-            console.log(`${e.target.parentElement.rowIndex}, ${e.target.cellIndex}`)
-        });
-    }
-    while(!player1){
-      var player1 = prompt("Player one enter name u will be red")
-    }
 
-    while(!player2){
-      var player2 = prompt("Player one enter name you will be yellow")
-    }
-    let player1Color = 'red'
-    let player2Color = 'yellow'
-  },
+const player1Color = 'red'
+const player2Color = 'yellow'
 
-  method(){
-  const playerTurn = document.querySelector('.player-turn');
 
-  Array.prototype.forEach.call(tableCell, (cell) =>{
-  cell.addEventListener('click', changeColor);
-  cell.style.backgroundColor = 'white'
+  for (let i=0; i < tableCell.length; i++){
+      tableCell[i].addEventListener('click', (event) => {
+          // console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
+          console.log(`${event.target}`);
+            changeColor(`${event.target}`)
+      });
+  }
+
+Array.prototype.forEach.call(tableCell, (cell) =>{
+cell.addEventListener('click', this.changeColor("event"));
+cell.style.backgroundColor = 'white'
 })
+console.log(Array.prototype.forEach);
+    // while(!player1){
+    //   let player1 = prompt("Player one enter name u will be red")
+    // }
 
-  function changeColor(event){
-    let column = event.target.cellIndex;
-    let row = []
+    // while(!player2){
+    //   let player2 = prompt("Player two enter name you will be yellow")
+    // }
+    
+  },
 
-      for (let i = 5; i > -1; i--){
-        if (tableRow[i].children[column].style.backgroundColor === 'white')
-          row.push(tableRow[i].children[column])
-            if (currentPlayer === 1){
-              row[0].style.backgroundColor = player1Color
-              if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
-                playerTurn.textContent = `${player1} WINS!`
-                return alert (`${player1} WINNER!!! `)
-                } 
-                else if(drawCheck()){
-                  playerTurn.textContent = "Game is a Draw"
-                  return alert ("DRAW")
-                } 
-                else{
-              playerTurn.textContent = `${player2}' turn`;
-              return currentPlayer = 2
-                }
-          }
-          else{
-            row[0].style.backgroundColor = player2Color
-            playerTurn.textContent = `${player1}'s turn`
-            if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
-                playerTurn.textContent = `${player2} WINS!`
-                return alert (`${player2} WINNER!!! `)
-                } 
-                else if(drawCheck()){
-                  playerTurn.textContent = "Game is a Draw"
-                  return alert ("DRAW")
-                } 
-                else{
-              playerTurn.textContent = `${player2}' turn`;
-              return currentPlayer = 1
-          }
-    }
-}
- let currentPlayer = 1;
+methods: {
+
+// selectors(){
+
+// },
+
+changeColor: function(event){
+  let column = event.cellIndex;
+  let row = []
+  let currentPlayer = 1
   playerTurn.textContent = `${player1}'s turn!`
+  console.log("column");
+
+  for (let i = 5; i > -1; i--){
+    if (tableRow[i].children[column].style.backgroundColor === 'white')
+      row.push(tableRow[i].children[column])
+        if (currentPlayer === 1){
+          row[0].style.backgroundColor = player1Color
+          console.log("return here");
+          if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
+            playerTurn.textContent = `${player1} WINS!`
+            return alert (`${player1} WINNER!!! `)
+            } 
+            else if(drawCheck()){
+              playerTurn.textContent = "Game is a Draw"
+              return alert ("DRAW")
+            } 
+            else{
+          playerTurn.textContent = `${player2}' turn`;
+          return currentPlayer = 2
+            }
+      }
+      else{
+        row[0].style.backgroundColor = player2Color
+        playerTurn.textContent = `${player1}'s turn`
+        if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
+            playerTurn.textContent = `${player2} WINS!`
+            return alert (`${player2} WINNER!!! `)
+            } 
+            else if(drawCheck()){
+              playerTurn.textContent = "Game is a Draw"
+              return alert ("DRAW")
+            } 
+            else{
+          playerTurn.textContent = `${player2}' turn`;
+          return currentPlayer = 1
+      }
+      }
+}
+},
+ 
     
 // checks the four colours are the same
-function colorMatchCheck(one, two, three, four){
+colorMatchCheck: function(one, two, three, four){
   return(one === two && one === three && one === four && one !== "white")
-}
+},
 
-function horizontalCheck(){
+horizontalCheck: function(){
   for (let row=0; row< tableRow.length; row++){
     for (let col = 0; col<4; col++){
       if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
@@ -164,9 +178,9 @@ function horizontalCheck(){
       }
     }
   }
-}
+},
 
-function verticalCheck(){
+verticalCheck: function(){
   for(let col=0; col< 7; col++){
     for(let row=0;  row<3; row ++){
       if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor, 
@@ -177,9 +191,9 @@ function verticalCheck(){
       }
     }
   }
-}
+},
 
-function diagonalCheckOne(){
+diagonalCheckOne: function(){
   for(let col=0; col<4; col++){
     for(let row=0; row<3; row++){
       if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
@@ -190,9 +204,9 @@ function diagonalCheckOne(){
       }
     }
   }
-}
+},
 
-function diagonalCheckTwo(){
+diagonalCheckTwo: function(){
   for(let col=0; col<4; col++){
     for(let row=5; row>2; row--){
       if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
@@ -203,9 +217,9 @@ function diagonalCheckTwo(){
       }
     }
   }
-}
+},
 
-function drawCheck(){
+drawCheck: function(){
   let fullSlot = []
   for(i=0; i<tableCell.length; i++){
     if(tableCell[i].style.backgroundColor !=='white'){
@@ -215,11 +229,11 @@ function drawCheck(){
   if(fullSlot.length === tableCell,length){
     return true 
   }
-}
+},
 
 }
 }
-}
+
 
 
 </script>
