@@ -54,11 +54,12 @@ export default {
     changeColor:  function(event){
     console.log("changeColor")
     console.log(event)
+    console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
     let column = event.target.cellIndex;
     let row = []
 
       for (let i = 5; i > -1; i--){
-        if (tableRow[i].children[column].style.backgroundColor === 'white')
+        if (tableRow[i].children[column].style.backgroundColor === 'white'){
           row.push(tableRow[i].children[column])
             if (currentPlayer === 1){
               console.log(row)
@@ -77,7 +78,8 @@ export default {
         return currentPlayer = 2
                 // }
           }
-          else{
+          else {
+            console.log(row)
             console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
             // playerTurn.textContent = `${playerTwo}'s turn`
@@ -94,6 +96,7 @@ export default {
               return currentPlayer = 1
             }
          }
+        }
       }
     },
   
