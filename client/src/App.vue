@@ -2,10 +2,8 @@
   <div id="app">
     <div>
       <form>
-      <form>
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One"/>
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two"/>        
-      </form>
       </form>
 
     </div>
@@ -26,7 +24,7 @@ import Game from './components/GameFunction'
     var currentPlayer = 1;
     var player1Color = 'red'
     var player2Color = 'yellow'
-    // playerTurn.textContent = `${playerOne}'s turn!`;
+    
 
 export default {
   data(){
@@ -52,37 +50,10 @@ export default {
 
 
   methods: {
-    what: function(){
-      console.log("hello")
-      console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
-    },
-
-    
-      
-        // tableCell[i].addEventListener('click', (e) => {
-        //     console.log(`${e.target.parentElement.rowIndex}, ${e.target.cellIndex}`)
-        // });
-
-    // while(!player1){
-    //   var player1 = prompt("Player one enter name u will be red")
-    //  }
-    // let player1Color = 'red'
-
-    // while(!player2){
-    //   var player2 = prompt("Player one enter name you will be yellow")
-    // }
-    // let player2Color = 'yellow'
-
-    
-
-    // Array.prototype.forEach.call(tableCell, (cell) =>{
-    // eventBus.addEventListener('listen', this.changeColor);
-    // cell.style.backgroundColor = 'white'
-    //     }
-    // )},
 
     changeColor:  function(event){
     console.log("changeColor")
+    console.log(event)
     let column = event.target.cellIndex;
     let row = []
 
@@ -91,107 +62,108 @@ export default {
           row.push(tableRow[i].children[column])
             if (currentPlayer === 1){
               console.log(row)
+              console.log(currentPlayer)
               row[0].style.backgroundColor = player1Color
-              if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
-                playerTurn.textContent = `${player1} WINS!`
+              if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
+                // playerTurn.textContent = `${playerOne} WINS!`
                 return alert (`${playerOne} WINNER!!! `)
                 } 
-                else if(drawCheck()){
+                else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
                   return alert ("DRAW")
                 } 
-                else{
-              playerTurn.textContent = `${playerTwo}' turn`;
-              return currentPlayer = 2
-                }
+                // else{
+              // playerTurn.textContent = `${playerTwo}' turn`;
+        return currentPlayer = 2
+                // }
           }
           else{
+            console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
-            playerTurn.textContent = `${player1}'s turn`
-            if (horizontalCheck() || verticalCheck() || diagonalCheckOne() || diagonalCheckTwo()){
-                playerTurn.textContent = `${player2} WINS!`
-                return alert (`${player2} WINNER!!! `)
+            // playerTurn.textContent = `${playerTwo}'s turn`
+            if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
+                playerTurn.textContent = `${playerTwo} WINS!`
+                return alert (`${playerTwo} WINNER!!! `)
                 } 
-                else if(drawCheck()){
+                else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
                   return alert ("DRAW")
                 } 
                 else{
-              playerTurn.textContent = `${player2}' turn`;
+              // playerTurn.textContent = `${playerOne}' turn`;
               return currentPlayer = 1
             }
          }
       }
     },
   
-      // checks the four colours are the same
-      colorMatchCheck: function(one, two, three, four){
-        return(one === two && one === three && one === four && one !== "white")
-      },
+    colorMatchCheck: function(one, two, three, four){
+      return(one === two && one === three && one === four && one !== "white")
+    },
 
-      horizontalCheck: function(){
-        for (let row=0; row< tableRow.length; row++){
-          for (let col = 0; col<4; col++){
-            if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
-            tableRow[row].children[col+1].style.backgroundColor,
-            tableRow[row].children[col+2].style.backgroundColor,
-            tableRow[row].children[col+3].style.backgroundColor)){
-              return true 
-            }
+    horizontalCheck: function(){
+      for (let row=0; row < tableRow.length; row++){
+        for (let col = 0; col<4; col++){
+          if(this.colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
+          tableRow[row].children[col+1].style.backgroundColor,
+          tableRow[row].children[col+2].style.backgroundColor,
+          tableRow[row].children[col+3].style.backgroundColor)){
+            return true 
           }
         }
-      },
+      }
+    },
 
-      verticalCheck: function(){
-        for(let col=0; col< 7; col++){
-          for(let row=0;  row<3; row ++){
-            if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor, 
-            tableRow[row+1].children[col].style.backgroundColor, 
-            tableRow[row+2].children[col].style.backgroundColor,
-            tableRow[row+3 ].children[col].style.backgroundColor,)){
-              return true;
-            }
+    verticalCheck: function(){
+      for(let col=0; col< 7; col++){
+        for(let row=0;  row<3; row ++){
+          if(this.colorMatchCheck(tableRow[row].children[col].style.backgroundColor, 
+          tableRow[row+1].children[col].style.backgroundColor, 
+          tableRow[row+2].children[col].style.backgroundColor,
+          tableRow[row+3 ].children[col].style.backgroundColor,)){
+            return true;
           }
         }
-      },
+      }
+    },
 
-      diagonalCheckOne: function(){
-        for(let col=0; col<4; col++){
-          for(let row=0; row<3; row++){
-            if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
-            tableRow[row+1].children[col+1].style.backgroundColor,
-            tableRow[row+2].children[col+2].style.backgroundColor,
-            tableRow[row+3].children[col+3].style.backgroundColor)){
-              return true
-            }
+    diagonalCheckOne: function(){
+      for(let col=0; col<4; col++){
+        for(let row=0; row<3; row++){
+          if(this.colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
+          tableRow[row+1].children[col+1].style.backgroundColor,
+          tableRow[row+2].children[col+2].style.backgroundColor,
+          tableRow[row+3].children[col+3].style.backgroundColor)){
+            return true
           }
         }
-      },
+      }
+    },
 
-      diagonalCheckTwo: function(){
-        for(let col=0; col<4; col++){
-          for(let row=5; row>2; row--){
-            if(colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
-            tableRow[row-1].children[col+1].style.backgroundColor,
-            tableRow[row-2].children[col+2].style.backgroundColor,
-            tableRow[row-3].children[col+3].style.backgroundColor)){
-              return true
-            }
+    diagonalCheckTwo: function(){
+      for(let col=0; col<4; col++){
+        for(let row=5; row>2; row--){
+          if(this.colorMatchCheck(tableRow[row].children[col].style.backgroundColor,
+          tableRow[row-1].children[col+1].style.backgroundColor,
+          tableRow[row-2].children[col+2].style.backgroundColor,
+          tableRow[row-3].children[col+3].style.backgroundColor)){
+            return true
           }
         }
-      },
+      }
+    },
 
-      drawCheck: function(){
-        let fullSlot = []
-        for(i=0; i<tableCell.length; i++){
-          if(tableCell[i].style.backgroundColor !=='white'){
-            fullSlot.push(tableCell[i])
-          }
+    drawCheck: function(){
+      let fullSlot = []
+      for(let i=0; i < tableCell.length; i++){
+        if(tableCell[i].style.backgroundColor !=='white'){
+          fullSlot.push(tableCell[i])
         }
-        if(fullSlot.length === tableCell,length){
-          return true 
-        }
-      },
+      }
+      if(fullSlot.length === tableCell,length){
+        return true 
+      }
+    },
   }
 }
 </script>

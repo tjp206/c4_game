@@ -77,6 +77,7 @@ import { eventBus } from '../main.js'
     var playerTurn = document.querySelector('.player-turn');
     var reset = document.querySelector('.reset')
     
+    
 
 
 
@@ -99,28 +100,10 @@ export default {
   },
     
   mounted(){
-    // let currentPlayer = 1;
-    // playerTurn.textContent = `${playerOne}'s turn!`;
-
-        // for (let i=0; i < tableCell.length; i++){
-        // console.log("listeners")
-        // tableCell[i].addEventListener('click', (e) => {            
-        //     console.log(`${e.target.parentElement.rowIndex}, ${e.target.cellIndex}`)
-        // tableCell[i].addEventListener('click', changeColor);
-        // cell.style.backgroundColor = 'white'
-        // })}
-        // }
-
-        // Array.prototype.forEach.call(tableCell, (cell) =>{
-        //     eventBus.$emit('listen', (event));
-        //     cell.style.backgroundColor = 'white'
-        //             }
-        //     )}
-
+    //   playerTurn.textContent = `${playerOne}`;
 
         for (let i=0; i < tableCell.length; i++){
-        console.log("listeners")
-        //This needs to go in!!!!!!!!
+        // console.log("listeners")
         tableCell[i].style.backgroundColor = 'white'
         tableCell[i].addEventListener('click', (event) => {
             eventBus.$emit('listen', event);
@@ -131,25 +114,6 @@ export default {
 
     }
 }
-    
-
-
-
-    
-
-
-
-    // methods: {
-
-    //     listen: function(){
-    //     console.log(tableCell)
-    //     Array.prototype.forEach.call(this.tableCell, (cell) =>{
-    //         eventBus.$emit('click', changeColor);
-    //         cell.style.backgroundColor = 'white'
-    //                 }
-    //             )}
-
-    // }
 
 </script>
 
