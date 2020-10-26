@@ -25,7 +25,6 @@ import Game from './components/GameFunction'
     var player1Color = 'red'
     var player2Color = 'yellow'
     
-
 export default {
   data(){
     return {
@@ -37,27 +36,19 @@ export default {
   components: {
     "game-function":Game,
   },
-
-
   mounted(){
     //Get Saved Player and Game Details.
     // this.getGames();
     // this.getPlayers();
-
     eventBus.$on('listen', event => this.changeColor(event));
   },
-
-
-
   methods: {
-
     changeColor:  function(event){
     console.log("changeColor")
     console.log(event)
     console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
     let column = event.target.cellIndex;
     let row = []
-
       for (let i = 5; i > -1; i--){
         if (tableRow[i].children[column].style.backgroundColor === 'white'){
           row.push(tableRow[i].children[column])
@@ -97,7 +88,6 @@ export default {
     colorMatchCheck: function(one, two, three, four){
       return(one === two && one === three && one === four && one !== "white")
     },
-
     horizontalCheck: function(){
       for (let row=0; row < tableRow.length; row++){
         for (let col = 0; col<4; col++){
@@ -110,7 +100,6 @@ export default {
         }
       }
     },
-
     verticalCheck: function(){
       for(let col=0; col< 7; col++){
         for(let row=0;  row<3; row ++){
@@ -123,7 +112,6 @@ export default {
         }
       }
     },
-
     diagonalCheckOne: function(){
       for(let col=0; col<4; col++){
         for(let row=0; row<3; row++){
@@ -136,7 +124,6 @@ export default {
         }
       }
     },
-
     diagonalCheckTwo: function(){
       for(let col=0; col<4; col++){
         for(let row=5; row>2; row--){
@@ -149,7 +136,6 @@ export default {
         }
       }
     },
-
     drawCheck: function(){
       let fullSlot = []
       for(let i=0; i < tableCell.length; i++){
@@ -166,19 +152,10 @@ export default {
 </script>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}; */
 
 body {
   background-color: snow;
 }
-
 *{
   margin: 0%;
   padding: 0;
@@ -187,7 +164,6 @@ body {
 h1{
   text-align: center;
 }
-
 .game {
   position: absolute;
   top: 8rem;
@@ -201,7 +177,6 @@ h1{
   padding: 1.5rem;
   border-radius: 1.5%;
 }
-
 .slot {
   width: 90px;
   height: 90px;
@@ -213,11 +188,9 @@ h1{
   border-radius: 50%;
   transition-duration: 0.4s;
 }
-
 .slot:hover {
   background-color: lightslategrey;
 }
-
 .reset {
   font-size: 16px;
   position: relative;
@@ -238,7 +211,6 @@ h1{
   transition-duration: 0.4s;
   padding: 12px;
 }
-
 .reset:hover {
   background-color: white;
   color: rgb(96, 96, 253);;
