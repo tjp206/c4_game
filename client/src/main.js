@@ -1,12 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-<<<<<<< HEAD
 Vue.config.productionTip = false;
-=======
-Vue.config.productionTip = false
-
->>>>>>> develop
 export const eventBus = new Vue();
 
 new Vue({
