@@ -8,7 +8,6 @@
     <p>{{tableCell}}</p>
     <div class="game">
       <table>
-    <!-- <button v-on:click="listen">Listen</button> -->
       <tr>
         <td class="slot"></td>
         <td class="slot"></td>
@@ -100,24 +99,16 @@ export default {
   },
     
   mounted(){
-    //   playerTurn.textContent = `${playerOne}`;
-
         for (let i=0; i < tableCell.length; i++){
-        // console.log("listeners")
         tableCell[i].style.backgroundColor = 'white'
         tableCell[i].addEventListener('click', (event) => {
             eventBus.$emit('listen', event);
-            console.log(event)
-            
-            
+            console.log(event)     
                     }
             )}
-
     }
 }
-
 </script>
 
 <style>
-
 </style>

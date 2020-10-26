@@ -64,35 +64,29 @@ export default {
             if (currentPlayer === 1){
               console.log(row)
               console.log(currentPlayer)
+              console.log(this.playerOne)
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                // playerTurn.textContent = `${playerOne} WINS!`
-                return alert (`${playerOne} WINNER!!! `)
+                return alert (`${this.playerOne} IS THE WINNER!!! `)
                 } 
                 else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
                   return alert ("DRAW")
                 } 
-                // else{
-              // playerTurn.textContent = `${playerTwo}' turn`;
         return currentPlayer = 2
-                // }
-          }
+                }
           else {
             console.log(row)
             console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
-            // playerTurn.textContent = `${playerTwo}'s turn`
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                playerTurn.textContent = `${playerTwo} WINS!`
-                return alert (`${playerTwo} WINNER!!! `)
+                return alert (`${this.playerTwo} IS THE WINNER!!! `)
                 } 
                 else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
                   return alert ("DRAW")
                 } 
                 else{
-              // playerTurn.textContent = `${playerOne}' turn`;
               return currentPlayer = 1
             }
          }
