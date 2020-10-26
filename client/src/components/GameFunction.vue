@@ -1,11 +1,8 @@
 <template>
 <div>
-    <h1>C-4!!!!</h1>
     <h3 class="player-turn"></h3>
-    <p>{{playerOne}} vs {{playerTwo}}</p>
+    <p class="player-names"><b>{{playerOne}} vs {{playerTwo}}</b></p>
 
-    
-    <p>{{tableCell}}</p>
     <div class="game">
       <table>
       <tr>
@@ -63,7 +60,7 @@
         <td class="slot"></td>
       </tr>
       </table>
-      <div class="reset">Reset</div>
+      <!-- <div class="reset">Reset</div> -->
     </div> 
 </div>
 </template>
@@ -111,4 +108,7 @@ export default {
 </script>
 
 <style>
+playerOne {
+  color: red;
+}
 </style>

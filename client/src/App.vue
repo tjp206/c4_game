@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <h1>Welcome To C-4!</h1>
+    <h1>Get Ready To Go Boom! &#129327;</h1><br>
     <div>
       <form>
-        <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One"/>
-        <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two"/>        
-      </form>
+        <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
+        <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
+      </form><br>
 
     </div>
 
@@ -46,8 +48,6 @@ export default {
 
     eventBus.$on('listen', event => this.changeColor(event));
   },
-
-
 
   methods: {
 
@@ -176,7 +176,12 @@ export default {
 }; */
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   background-color: snow;
+  background-image: url('~@/assets/c4_starwars.jpg');
 }
 
 *{
@@ -184,13 +189,21 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-h1{
+h1 {
+  color: black;
   text-align: center;
+  text-shadow: 0 0 3px rgb(96, 96, 253);;
+}
+
+.player-names {
+  color: black;
+  text-align: center;
+  text-shadow: 0 0 3px rgb(96, 96, 253);;
 }
 
 .game {
   position: absolute;
-  top: 8rem;
+  top: 10rem;
   left: 50%;
   transform: translate(-50%);
   width: 650px;
@@ -218,10 +231,16 @@ h1{
   background-color: lightslategrey;
 }
 
+input[type=text] {
+  border: 2px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px rgb(96, 96, 253);
+}
+
 .reset {
   font-size: 16px;
   position: relative;
-  top: 80vh;
+  top: 10vh;
   margin-bottom: 1rem;
   left: 50%;
   transform: translate(-50%);
