@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <!-- <div id="app">
 
   </div>
 </template>
@@ -30,4 +30,4 @@ methods:{
 
 <style>
 
-</style>
+</style> -->
