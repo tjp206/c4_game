@@ -60,7 +60,8 @@ export default {
               console.log(this.playerOne)
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return alert (`${this.playerOne} IS THE WINNER!!! `)
+                // return alert (`${this.playerOne} IS THE WINNER!!! `)
+                return this.$alert(`${this.playerOne} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
@@ -73,7 +74,8 @@ export default {
             console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return alert (`${this.playerTwo} IS THE WINNER!!! `)
+                // return alert (`${this.playerTwo} IS THE WINNER!!! `)
+                return this.$alert(`${this.playerTwo} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   playerTurn.textContent = "Game is a Draw"
