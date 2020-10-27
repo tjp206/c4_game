@@ -169,10 +169,10 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* background-color: snow; */
   background-image: url('~@/assets/c4_starwars.jpg');
   width: 100vw;
 }
+
 *{
   margin: 0%;
   padding: 0;
@@ -186,23 +186,26 @@ h1 {
 }
 
 .player-names {
-  font-size: 20px;
+  font-size: 32px;
   text-align: center;
   text-shadow: 0 0 3px rgb(96, 96, 253);
 }
+
 .game {
-  position: absolute;
-  top: 10rem;
-  left: 50%;
-  transform: translate(-50%);
+  position: relative;
+  order: 1;
+  justify-content: space-around;
+  /* top: 1rem; */
+  /* left: 50%; */
+  /* transform: translate(-50%); */
   width: 650px;
   height: 600px;
   background: rgb(96, 96, 253);
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
-  
 }
+
 .slot {
   width: 90px;
   height: 90px;
@@ -214,6 +217,7 @@ h1 {
   border-radius: 50%;
   transition-duration: 0.4s;
 }
+
 .slot:hover {
   background-color: lightslategrey;
 }
@@ -261,4 +265,37 @@ input[type=text] {
 #p2 {
   color: rgb(255, 255, 0);
 }
+
+#dragtarget-red{
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 50%;
+  display: inline;
+  background: transparent;
+}
+
+#dragtarget-yellow{
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 50%;
+  display: inline;
+  background: transparent;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#red{
+  order: -1;
+}
+
+#yellow {
+  order: 2;
+}
+
+
 </style>

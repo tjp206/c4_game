@@ -1,13 +1,14 @@
 <template>
 <div>
     <h3 class="player-turn"></h3>
-    <p>{{playerOne}} vs {{playerTwo}}</p>
-    <div>
-    <div v-on:dragover="allowDrop">
-    <img draggable="true" id="dragtarget" src="../assets/red.png" width="50" height="50">
+    <p class="player-names"><b id="p1">{{playerOne}}</b> vs <b id="p2">{{playerTwo}}</b></p>
+    <div class="flex-container">
+    <div id="red" v-on:dragover="allowDrop">
+    <img draggable="true" id="dragtarget-red" src="../assets/red.png" width="50" height="50">
     </div>
+    <div id="yellow" v-on:dragover="allowDrop">
+    <img draggable="true" id="dragtarget-yellow" src="../assets/yellow.png" width="50" height="50">
     </div>
-    <p class="player-names"><!--<b>| </b>--><b id="p1">{{playerOne}}</b> <b>vs</b> <b id="p2">{{playerTwo}}</b> <!--<b>|</b>--></p>
 
     <div class="game" v-on:dragover="allowDrop">
       <table>
@@ -66,10 +67,8 @@
         <td class="slot"></td>
       </tr>
       </table>
-      <div class="save">Save Game</div>
+      <!-- <div class="save">Save Game</div> -->
     </div> 
-    <div v-on:dragover="allowDrop">
-    <img draggable="true" id="dragtarget" src="../assets/yellow.png" width="50" height="50">
     </div>
     <timer></timer>
 </div>
