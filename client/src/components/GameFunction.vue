@@ -1,7 +1,7 @@
 <template>
 <div>
     <h3 class="player-turn"></h3>
-    <p class="player-names"><b>{{playerOne}} vs {{playerTwo}}</b></p>
+    <p class="player-names"><!--<b>| </b>--><b id="p1">{{playerOne}}</b> <b>vs</b> <b id="p2">{{playerTwo}}</b> <!--<b>|</b>--></p>
 
     <div class="game">
       <table>
@@ -60,7 +60,7 @@
         <td class="slot"></td>
       </tr>
       </table>
-      <!-- <div class="reset">Reset</div> -->
+      <div class="save">Save Game</div>
     </div> 
 </div>
 </template>

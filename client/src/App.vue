@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Welcome To C-4!</h1>
+    <h1>~ Welcome To C-4 ~</h1>
     <h1>Get Ready To Go Boom! &#129327;</h1><br>
     <div>
       <form>
@@ -180,8 +180,9 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: snow;
+  /* background-color: snow; */
   background-image: url('~@/assets/c4_starwars.jpg');
+  width: 100vw;
 }
 
 *{
@@ -189,6 +190,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
 h1 {
   color: black;
   text-align: center;
@@ -196,9 +198,9 @@ h1 {
 }
 
 .player-names {
-  color: black;
+  font-size: 20px;
   text-align: center;
-  text-shadow: 0 0 3px rgb(96, 96, 253);;
+  text-shadow: 0 0 3px rgb(96, 96, 253);
 }
 
 .game {
@@ -209,10 +211,10 @@ h1 {
   width: 650px;
   height: 600px;
   background: rgb(96, 96, 253);
-  /* border: 1px solid black; */
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
+  
 }
 
 .slot {
@@ -237,8 +239,9 @@ input[type=text] {
   box-shadow: 3px 3px 5px rgb(96, 96, 253);
 }
 
-.reset {
+.save {
   font-size: 16px;
+  font-weight: bold;
   position: relative;
   top: 10vh;
   margin-bottom: 1rem;
@@ -258,11 +261,19 @@ input[type=text] {
   padding: 12px;
 }
 
-.reset:hover {
+.save:hover {
   background-color: white;
   color: rgb(96, 96, 253);;
   border: 1px;
   border-style:solid;
   border-color: rgb(96, 96, 253);
+}
+
+#p1 {
+  color: rgb(212, 23, 23);
+}
+
+#p2 {
+  color: rgb(255, 255, 0);
 }
 </style>
