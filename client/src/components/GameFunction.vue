@@ -1,7 +1,7 @@
 <template>
 <div>
     <h3 class="player-turn"></h3>
-    <p class="player-names"><b id="p1">{{playerOne}}</b> vs <b id="p2">{{playerTwo}}</b></p>
+    
     <div class="flex-container">
     <div id="red" v-on:dragover="allowDrop">
     <img draggable="true" id="dragtarget-red" src="../assets/red.png" width="50" height="50">

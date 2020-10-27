@@ -7,6 +7,7 @@
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
       </form><br>
+      <p class="player-names"><b id="p1">{{playerOne}}</b> vs <b id="p2">{{playerTwo}}</b></p>
     </div>
     <game-function v-if="playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
   </div>
@@ -44,18 +45,12 @@ export default {
   },
   methods: {
     changeColor:  function(event){
-    console.log("changeColor")
-    console.log(event)
-    console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
     let column = event.target.cellIndex;
     let row = []
       for (let i = 5; i > -1; i--){
         if (tableRow[i].children[column].style.backgroundColor === 'white'){
           row.push(tableRow[i].children[column])
             if (currentPlayer === 1){
-              console.log(row)
-              console.log(currentPlayer)
-              console.log(this.playerOne)
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
                 return this.$alert(`${this.playerOne} is the Winner!!! `);
@@ -66,8 +61,6 @@ export default {
         return currentPlayer = 2
                 }
           else {
-            console.log(row)
-            console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
                 return this.$alert(`${this.playerTwo} is the Winner!!! `);
@@ -272,9 +265,27 @@ input[type=text] {
 
 #red{
   order: -1;
+  margin: 18px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+#red:hover {
+  transform: scale(1.5); 
 }
 
 #yellow {
   order: 2;
+  margin: 18px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+#yellow:hover {
+  transform: scale(1.5); 
 }
 </style>
