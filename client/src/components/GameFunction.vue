@@ -1,6 +1,5 @@
 <template>
 <div>
-    <h1>C-4!!!!</h1>
     <h3 class="player-turn"></h3>
     <p>{{playerOne}} vs {{playerTwo}}</p>
     <div>
@@ -10,6 +9,9 @@
     </div>
     <div class="game"
     v-on:dragover="allowDrop">
+    <p class="player-names"><!--<b>| </b>--><b id="p1">{{playerOne}}</b> <b>vs</b> <b id="p2">{{playerTwo}}</b> <!--<b>|</b>--></p>
+
+    <div class="game">
       <table>
       <tr>
         <td class="slot"></td>
@@ -66,7 +68,7 @@
         <td class="slot"></td>
       </tr>
       </table>
-      <div class="reset">Reset</div>
+      <div class="save">Save Game</div>
     </div> 
     <div v-on:dragover="allowDrop">
     <img draggable="true" id="dragtarget" src="../assets/yellow.png" width="50" height="50">
@@ -128,8 +130,11 @@ export default {
           }
         }
       }
-}
+
 </script>
 
 <style>
+playerOne {
+  color: red;
+}
 </style>

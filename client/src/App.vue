@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <h1>~ Welcome To C-4 ~</h1>
+    <h1>Get Ready To Go Boom! &#129327;</h1><br>
     <div>
       <form>
-        <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One"/>
-        <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two"/>        
-      </form>
+        <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
+        <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
+      </form><br>
 
     </div>
 
@@ -154,28 +156,43 @@ export default {
 <style>
 
 body {
-  background-color: snow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* background-color: snow; */
+  background-image: url('~@/assets/c4_starwars.jpg');
+  width: 100vw;
 }
 *{
   margin: 0%;
   padding: 0;
   box-sizing: border-box;
 }
-h1{
+
+h1 {
+  color: black;
   text-align: center;
+  text-shadow: 0 0 3px rgb(96, 96, 253);;
+}
+
+.player-names {
+  font-size: 20px;
+  text-align: center;
+  text-shadow: 0 0 3px rgb(96, 96, 253);
 }
 .game {
   position: absolute;
-  top: 8rem;
+  top: 10rem;
   left: 50%;
   transform: translate(-50%);
   width: 650px;
   height: 600px;
   background: rgb(96, 96, 253);
-  /* border: 1px solid black; */
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
+  
 }
 .slot {
   width: 90px;
@@ -191,10 +208,18 @@ h1{
 .slot:hover {
   background-color: lightslategrey;
 }
-.reset {
+
+input[type=text] {
+  border: 2px solid black;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px rgb(96, 96, 253);
+}
+
+.save {
   font-size: 16px;
+  font-weight: bold;
   position: relative;
-  top: 80vh;
+  top: 10vh;
   margin-bottom: 1rem;
   left: 50%;
   transform: translate(-50%);
@@ -211,11 +236,20 @@ h1{
   transition-duration: 0.4s;
   padding: 12px;
 }
-.reset:hover {
+
+.save:hover {
   background-color: white;
   color: rgb(96, 96, 253);;
   border: 1px;
   border-style:solid;
   border-color: rgb(96, 96, 253);
+}
+
+#p1 {
+  color: rgb(212, 23, 23);
+}
+
+#p2 {
+  color: rgb(255, 255, 0);
 }
 </style>
