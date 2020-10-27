@@ -71,11 +71,13 @@
     <div v-on:dragover="allowDrop">
     <img draggable="true" id="dragtarget" src="../assets/yellow.png" width="50" height="50">
     </div>
+    <timer></timer>
 </div>
 </template>
 
 <script>
 import { Drag, Drop } from 'vue-drag-drop';
+import Timer from './Timer.vue'
 import { eventBus } from '../main.js'
    var tableRow = document.getElementsByTagName('tr');
     var tableCell = document.getElementsByTagName('td');
@@ -85,7 +87,11 @@ import { eventBus } from '../main.js'
 export default {
     name: "game-function",
     props: ["playerOne", "playerTwo"],
-    components: { Drag, Drop },
+    components: { 
+      Drag, 
+      Drop,
+      'timer':Timer
+     },
   data(){
     return {
     tableRow: document.getElementsByTagName('tr'),
@@ -108,7 +114,20 @@ export default {
             console.log(event)     
                     }
             )}
-    }
+    },
+    
+      computed: {
+          formattedTimeLeft() {
+            const timeLeft = this.timeLeft      
+            const minutes = Math.floor(timeLeft / 60)
+            let seconds = timeLeft % 60
+            if (seconds < 10) {
+              seconds = `0${seconds}`
+            }
+            return `${minutes}:${seconds}`
+          }
+        }
+      }
 }
 </script>
 
