@@ -7,11 +7,8 @@
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
       </form><br>
-
     </div>
-
     <game-function v-if="playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
-    
   </div>
 </template>
 
@@ -61,12 +58,9 @@ export default {
               console.log(this.playerOne)
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                // return alert (`${this.playerOne} IS THE WINNER!!! `)
                 return this.$alert(`${this.playerOne} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
-                  // playerTurn.textContent = "Game is a Draw"
-                  // return alert ("DRAW")
                   return this.$alert(`The Game is a draw!!!`)
                 } 
         return currentPlayer = 2
@@ -76,12 +70,9 @@ export default {
             console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                // return alert (`${this.playerTwo} IS THE WINNER!!! `)
                 return this.$alert(`${this.playerTwo} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
-                  // playerTurn.textContent = "Game is a Draw"
-                  // return alert ("DRAW")
                   return this.$alert(`The Game is a draw!!!`)
                 } 
                 else{
@@ -144,13 +135,9 @@ export default {
       }
     },
     drawCheck: function(){
-      // let fullSlot = []
-      console.log("draw!!!")
       for(let i=0; i < tableCell.length; i++){
         if(tableCell[i].style.backgroundColor !=='white'){
           fullSlot.push(tableCell[i])
-          console.log("FS",fullSlot.length)
-          console.log("TC",tableCell.length)
           if(fullSlot.length === tableCell.length){
               return true
           }
@@ -163,7 +150,6 @@ export default {
 </script>
 
 <style>
-
 body {
   display: flex;
   flex-direction: column;
@@ -195,9 +181,6 @@ h1 {
   position: relative;
   order: 1;
   justify-content: space-around;
-  /* top: 1rem; */
-  /* left: 50%; */
-  /* transform: translate(-50%); */
   width: 650px;
   height: 600px;
   background: rgb(96, 96, 253);
@@ -267,7 +250,6 @@ input[type=text] {
 }
 
 #dragtarget-red{
-  /* display: flex; */
   flex-direction: column;
   justify-content: space-around;
   border-radius: 50%;
@@ -276,7 +258,6 @@ input[type=text] {
 }
 
 #dragtarget-yellow{
-  /* display: flex; */
   flex-direction: column;
   justify-content: space-around;
   border-radius: 50%;
@@ -296,6 +277,4 @@ input[type=text] {
 #yellow {
   order: 2;
 }
-
-
 </style>
