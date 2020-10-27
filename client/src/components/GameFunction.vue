@@ -7,11 +7,9 @@
     <img draggable="true" id="dragtarget" src="../assets/red.png" width="50" height="50">
     </div>
     </div>
-    <div class="game"
-    v-on:dragover="allowDrop">
     <p class="player-names"><!--<b>| </b>--><b id="p1">{{playerOne}}</b> <b>vs</b> <b id="p2">{{playerTwo}}</b> <!--<b>|</b>--></p>
 
-    <div class="game">
+    <div class="game" v-on:dragover="allowDrop">
       <table>
       <tr>
         <td class="slot"></td>
