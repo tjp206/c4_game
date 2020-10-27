@@ -26,6 +26,7 @@ import Game from './components/GameFunction'
     var currentPlayer = 1;
     var player1Color = 'red'
     var player2Color = 'yellow'
+    var fullSlot = []
     
 export default {
   data(){
@@ -64,8 +65,9 @@ export default {
                 return this.$alert(`${this.playerOne} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
-                  playerTurn.textContent = "Game is a Draw"
-                  return alert ("DRAW")
+                  // playerTurn.textContent = "Game is a Draw"
+                  // return alert ("DRAW")
+                  return this.$alert(`The Game is a draw!!!`)
                 } 
         return currentPlayer = 2
                 }
@@ -78,8 +80,9 @@ export default {
                 return this.$alert(`${this.playerTwo} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
-                  playerTurn.textContent = "Game is a Draw"
-                  return alert ("DRAW")
+                  // playerTurn.textContent = "Game is a Draw"
+                  // return alert ("DRAW")
+                  return this.$alert(`The Game is a draw!!!`)
                 } 
                 else{
               return currentPlayer = 1
@@ -141,18 +144,22 @@ export default {
       }
     },
     drawCheck: function(){
-      let fullSlot = []
+      // let fullSlot = []
+      console.log("draw!!!")
       for(let i=0; i < tableCell.length; i++){
         if(tableCell[i].style.backgroundColor !=='white'){
           fullSlot.push(tableCell[i])
+          console.log("FS",fullSlot.length)
+          console.log("TC",tableCell.length)
+          if(fullSlot.length === tableCell.length){
+              return true
+          }
+          return false
+          }
         }
-      }
-      if(fullSlot.length === tableCell,length){
-        return true 
       }
     },
   }
-}
 </script>
 
 <style>
