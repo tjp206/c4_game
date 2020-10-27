@@ -1,7 +1,7 @@
 use c4
 db.dropDatabase();
 
-db.c4.insertMany([
+db.c4.insert([
     {
         name: 'John',
         wins: 3,
@@ -19,5 +19,5 @@ db.c4.insertMany([
         wins: 2,
         draws: 2,
         losses: 1
-    },
+    }
 ])
