@@ -4,7 +4,7 @@ db.dropDatabase();
 db.c4.insert([
     {
         name: 'John',
-        wins: 3,
+        wins: 1,
         draws: 1,
         losses: 1
     },
@@ -16,7 +16,7 @@ db.c4.insert([
     },
     {
         name: 'TJ',
-        wins: 2,
+        wins: 3,
         draws: 2,
         losses: 1
     }
