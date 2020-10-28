@@ -57,8 +57,9 @@ const createRouter = function(collection) {
 
     // UPDATE PLAYER
     router.put('/:id', (req, res) => {
-        const id = req.params.id
-        const updatePlayer = req.body
+        const id = req.params.id;
+        const updatePlayer = req.body;
+        delete updatePlayer._id;
         collection.findOneAndUpdate(
             { _id: ObjectID(id) },
             { $set: updatePlayer },

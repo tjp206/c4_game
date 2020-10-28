@@ -1,18 +1,25 @@
 <template lang="html">
-	<!-- <div id="leaderboard-list">
-		<h2>Players</h2>
+	<div id="leaderboard-list">
+		<h2>LeaderBoard</h2>
 		<ul>
-			<li v-for="leaderboard in leaderboards">{{ leaderboard.name }} wins: {{ leaderboard.wins }}</li>
+			<list-item :leaderboards="leaderboards" v-for="(player, index) in leaderboards" :player="player" :key="index"></list-item>
 		</ul>
 	</div>
 </template>
 
 <script>
+import { eventBus } from '@/main';
+import LeaderBoardPlayer from './LeaderBoardPlayer'
 export default {
 	name: "leaderboard-list",
-	props: ["leaderboards"]
+	props: ["leaderboards"],
+	
+	components:{
+		'list-item': LeaderBoardPlayer
+	}
+	
 }
 </script>
 
 <style lang="css" scoped>
-</style> -->
+</style>

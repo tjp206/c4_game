@@ -1,33 +1,35 @@
 <template>
-  <!-- <div id="app">
-
+  <div>
+    <form id=create v-on:submit.prevent="handleSubmit">
+    <label for="name">Create Player</label>
+    <input type="text" id="name" name="name" v-model="name" required/>
+    <input type="submit" name="submit" value="Create" />
+    </form>
   </div>
 </template>
 
 <script>
+import { eventBus } from '@/main';
 export default {
-name: "leaderboard-form",
+
 	data(){
 		return {
 			name: "",
-			wins: "",
-			losses: ""
+      wins: 0,
     }
   },
 
-data(){
-   return{
-       players: [],
-   }
-},
-
-methods:{
-    
+methods: {
+handleSubmit() {
+  eventBus.$emit('create-player', this.$data);
+  this.name = name;
+  this.wins = 0;
 }
+},
 
 }
 </script>
 
 <style>
 
-</style> -->
+</style>

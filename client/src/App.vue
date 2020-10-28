@@ -1,21 +1,30 @@
 <template>
   <div id="app">
+    <div>
     <h1>~ Connect Force ~</h1>
     <h2>May The Fours Be With You!</h2><br>
-    <div>
-      <form>
+      <div>
+      <!-- <form>
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
-      </form><br>
-      <p v-if="playerOne" class="player-names"><b id="p1">{{playerOne}}</b> <b id="vs">vs</b> <b id="p2">{{playerTwo}}</b></p>
+      </form><br> -->
+      <p v-if="playerOne && playerTwo" class="player-names"><b id="p1">{{playerOne.name}}</b> <b id="vs">vs</b> <b id="p2">{{playerTwo.name}}</b></p>
     </div>
-    <game-function v-if="playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
+    <game-function v-if="playerOne && playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
+    </div>
+    <aside id="aside">
+    <leaderboard-form/>
+    <leaderboard-item :leaderboards="leaderboards"/>
+    </aside>
   </div>
 </template>
 
 <script>
 import { eventBus } from './main'
 import Game from './components/GameFunction'
+import LeaderBoardForm from './components/LeaderBoardForm'
+import LeaderBoardItem from './components/LeaderBoardItem.vue';
+import GameService from './services/GameService'
    var tableRow = document.getElementsByTagName('tr');
     var tableCell = document.getElementsByTagName('td');
     var tableSlot =  document.querySelector('.slot');
@@ -29,21 +38,43 @@ import Game from './components/GameFunction'
 export default {
   data(){
     return {
-    playerOne:"",
-    playerTwo:"",
+    players: 0,
+    playerOne:null,
+    playerTwo:null,
+    leaderboards: []
     }
   },
   name: 'App',
   components: {
     "game-function":Game,
+    "leaderboard-form": LeaderBoardForm,
+    "leaderboard-item": LeaderBoardItem
   },
+
+
   mounted(){
-    //Get Saved Player and Game Details.
-    // this.getGames();
-    // this.getPlayers();
+    this.fetchPlayers();
     eventBus.$on('listen', event => this.changeColor(event));
-  },
+    eventBus.$on('create-player', (player) => {
+      GameService.postPlayer(player)
+        .then(player => this.leaderboards.push(player));
+    });
+    eventBus.$on('player-selected', (player) => {
+      if (this.playerOne !== null){
+        this.playerTwo = player}
+        else{
+          this.playerOne = player}
+      });
+      // this.player = player
+      // console.log(this.player)
+    },
+  
   methods: {
+    fetchPlayers() {
+    GameService.getPlayer()
+    .then(players => this.leaderboards = players);
+    },
+
     changeColor:  function(event){
     let column = event.target.cellIndex;
     let row = []
@@ -53,7 +84,8 @@ export default {
             if (currentPlayer === 1){
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return this.$alert(`${this.playerOne} is the Winner!!! `);
+                this.playerWin(this.playerOne)
+                return this.$alert(`${this.playerOne.name} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   return this.$alert(`The Game is a draw!!!`)
@@ -63,7 +95,8 @@ export default {
           else {
             row[0].style.backgroundColor = player2Color
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return this.$alert(`${this.playerTwo} is the Winner!!! `);
+              this.playerWin(this.playerTwo)
+                return this.$alert(`${this.playerTwo.name} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   return this.$alert(`The Game is a draw!!!`)
@@ -75,10 +108,20 @@ export default {
         }
       }
     },
+
+    playerWin: function(player){
+      player.wins = player.wins +=1
+      console.log(player.wins)
+      console.log(player)
+      GameService.updatePlayer(player)
+
+
+    },
   
     colorMatchCheck: function(one, two, three, four){
       return(one === two && one === three && one === four && one !== "white")
     },
+
     horizontalCheck: function(){
       for (let row=0; row < tableRow.length; row++){
         for (let col = 0; col<4; col++){
@@ -91,6 +134,7 @@ export default {
         }
       }
     },
+
     verticalCheck: function(){
       for(let col=0; col< 7; col++){
         for(let row=0;  row<3; row ++){
@@ -103,6 +147,7 @@ export default {
         }
       }
     },
+
     diagonalCheckOne: function(){
       for(let col=0; col<4; col++){
         for(let row=0; row<3; row++){
@@ -115,6 +160,7 @@ export default {
         }
       }
     },
+
     diagonalCheckTwo: function(){
       for(let col=0; col<4; col++){
         for(let row=5; row>2; row--){
@@ -127,6 +173,7 @@ export default {
         }
       }
     },
+
     drawCheck: function(){
       for(let i=0; i < tableCell.length; i++){
         if(tableCell[i].style.backgroundColor !=='white'){
@@ -138,11 +185,21 @@ export default {
           }
         }
       }
-    },
-  }
+    }
+}
 </script>
 
 <style>
+li{
+  list-style-type: none;
+  font-weight: 900;
+}
+#aside{
+  height: 50px;
+  text-align: left;
+  align-items: left;
+  
+}
 body {
   display: flex;
   flex-direction: column;
@@ -155,21 +212,16 @@ body {
   width: 100vw;
 }
 
-/* html {
-  background: url(img_man.jpg) no-repeat center fixed;
-  background-size: cover;
-} */
-
 *{
   margin: 0%;
   padding: 0;
   box-sizing: border-box;
 }
 
-h1, h2, #vs {
+h1, h2, #vs, #aside {
   color: whitesmoke;
   text-align: center;
-  text-shadow: 0 0 3px rgb(96, 96, 253);;
+  text-shadow: 0 0 3px rgb(96, 96, 253);
 }
 
 .player-names {
@@ -184,7 +236,6 @@ h1, h2, #vs {
   justify-content: space-around;
   width: 650px;
   height: 600px;
-  /* background: rgb(96, 96, 253); */
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
@@ -201,10 +252,6 @@ h1, h2, #vs {
   border-radius: 50%;
   transition-duration: 0.4s;
 }
-
-/* .slot:hover {
-  background-color: lightslategrey;
-} */
 
 input[type=text] {
   border: 2px solid black;
@@ -295,5 +342,9 @@ input[type=text] {
 
 #yellow:hover {
   transform: scale(2.0); 
+}
+
+#create {
+  margin: 15px;
 }
 </style>
