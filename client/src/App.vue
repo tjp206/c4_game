@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <h1>~ Welcome To C-4 ~</h1>
-    <h1>Get Ready To Go Boom! &#129327;</h1><br>
+    <h1>~ Connect Force ~</h1>
+    <h2>May The Fours Be With You!</h2><br>
     <div>
       <form>
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
       </form><br>
-      <p class="player-names"><b id="p1">{{playerOne}}</b> vs <b id="p2">{{playerTwo}}</b></p>
+      <p v-if="playerOne" class="player-names"><b id="p1">{{playerOne}}</b> <b id="vs">vs</b> <b id="p2">{{playerTwo}}</b></p>
     </div>
     <game-function v-if="playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
   </div>
@@ -22,8 +22,8 @@ import Game from './components/GameFunction'
     var playerTurn = document.querySelector('.player-turn');
     var reset = document.querySelector('.reset')
     var currentPlayer = 1;
-    var player1Color = 'red'
-    var player2Color = 'yellow'
+    var player1Color = 'green'
+    var player2Color = 'red'
     var fullSlot = []
     
 export default {
@@ -148,9 +148,17 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('~@/assets/c4_starwars.jpg');
+  background-image: url('~@/assets/yodaCrop.png'), url('~@/assets/DarthCrop.png');
+  background-position: top left , top right;
+  background-size: 50%, 50%;
+  background-repeat: no-repeat, no-repeat;
   width: 100vw;
 }
+
+/* html {
+  background: url(img_man.jpg) no-repeat center fixed;
+  background-size: cover;
+} */
 
 *{
   margin: 0%;
@@ -158,8 +166,8 @@ body {
   box-sizing: border-box;
 }
 
-h1 {
-  color: black;
+h1, h2, #vs {
+  color: whitesmoke;
   text-align: center;
   text-shadow: 0 0 3px rgb(96, 96, 253);;
 }
@@ -176,7 +184,7 @@ h1 {
   justify-content: space-around;
   width: 650px;
   height: 600px;
-  background: rgb(96, 96, 253);
+  /* background: rgb(96, 96, 253); */
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
@@ -194,9 +202,9 @@ h1 {
   transition-duration: 0.4s;
 }
 
-.slot:hover {
+/* .slot:hover {
   background-color: lightslategrey;
-}
+} */
 
 input[type=text] {
   border: 2px solid black;
@@ -235,11 +243,11 @@ input[type=text] {
 }
 
 #p1 {
-  color: rgb(212, 23, 23);
+  color: lightgreen;
 }
 
 #p2 {
-  color: rgb(255, 255, 0);
+  color: red;
 }
 
 #dragtarget-red{
@@ -265,27 +273,27 @@ input[type=text] {
 
 #red{
   order: -1;
-  margin: 18px;
+  margin: 0px;
   transition: transform .2s;
   width: 200px;
   height: 200px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 #red:hover {
-  transform: scale(1.5); 
+  transform: scale(2.0);
 }
 
 #yellow {
   order: 2;
-  margin: 18px;
+  margin: 0px;
   transition: transform .2s;
   width: 200px;
   height: 200px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 #yellow:hover {
-  transform: scale(1.5); 
+  transform: scale(2.0); 
 }
 </style>
