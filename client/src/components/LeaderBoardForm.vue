@@ -23,7 +23,7 @@ methods: {
 handleSubmit() {
   eventBus.$emit('create-player', this.$data);
   this.name = name;
-  this.wins = 0;
+  this.wins = null;
 }
 },
 
