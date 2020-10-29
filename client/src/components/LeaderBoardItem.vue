@@ -2,8 +2,8 @@
 	<div id="leaderboard-list">
 		<h2>LeaderBoard</h2>
 		<ul>
-			<list-item :leaderboards="leaderboards" v-for="player in leaderboards" :player="player" :key="index"></list-item>
-			<input type="submit" name="leaders" value="leaders" v-onClick="sortLeader()" />
+			<list-item :leaderboards="leaderboards" v-for="(player,index) in leaderboards" :player="player" :key="index"></list-item>
+			<!-- <input type="submit" name="leaders" value="leaders" v-onClick="sortLeader()" /> -->
 		</ul>
 	</div>
 </template>
@@ -12,8 +12,8 @@
 import { eventBus } from '@/main';
 import LeaderBoardPlayer from './LeaderBoardPlayer'
 
-const wins = [];
-document.getElementById("player").innerHTML = wins;
+// const wins = [];
+// document.getElementById("player").innerHTML = wins;
 
 export default {
 	name: "leaderboard-list",
@@ -22,13 +22,13 @@ export default {
 	components:{
 		'list-item': LeaderBoardPlayer
 	},
-	methods: {
-		sortLeader: function() {
-  			// wins.sort(function(a, b){return a-b});
-  			wins.sort((a, b) => a - b);
-  			document.getElementById("player").innerHTML = wins;
-		}
-	}
+	// methods: {
+	// 	sortLeader: function() {
+  	// 		// wins.sort(function(a, b){return a-b});
+  	// 		wins.sort((a, b) => a - b);
+  	// 		document.getElementById("player").innerHTML = wins;
+	// 	}
+	// }
 	
 }
 </script>
