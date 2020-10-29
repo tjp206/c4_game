@@ -15,7 +15,7 @@
     <aside id="aside">
     <leaderboard-form/>
     <leaderboard-item :leaderboards="leaderboards"/>
-    </aside>
+    </aside> 
   </div>
 </template>
 

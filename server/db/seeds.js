@@ -3,21 +3,15 @@ db.dropDatabase();
 
 db.c4.insert([
     {
-        name: 'John',
-        wins: 3,
-        draws: 1,
-        losses: 1
+        name: 'Luke Skywalker',
+        wins: 0,
     },
     {
-        name: 'Steven',
-        wins: 2,
-        draws: 1,
-        losses: 2
+        name: 'Master Yoda',
+        wins: 0,
     },
     {
-        name: 'TJ',
-        wins: 2,
-        draws: 2,
-        losses: 1
+        name: 'Lord Vader',
+        wins: 0,
     }
 ])
