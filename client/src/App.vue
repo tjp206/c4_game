@@ -1,64 +1,91 @@
 <template>
   <div id="app">
-    <h1>~ Welcome To C-4 ~</h1>
-    <h1>Get Ready To Go Boom! &#129327;</h1><br>
     <div>
-      <form>
+    <h1>~ Connect Force ~</h1>
+    <h2>May The Fours Be With You!</h2><br>
+      <div>
+      <!-- <form>
         <input type="text" v-model="playerOne" id="playerOne" placeholder="Player One" required />
         <input type="text" v-model="playerTwo" id="playerTwo" placeholder="Player Two" required />        
-      </form><br>
+      </form><br> -->
+      <p v-if="playerOne && playerTwo" class="player-names"><b id="p1">{{playerOne.name}}</b> <b id="vs">vs</b> <b id="p2">{{playerTwo.name}}</b></p>
     </div>
-    <game-function v-if="playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
+    <game-function v-if="playerOne && playerTwo" :playerOne="playerOne" :playerTwo="playerTwo"></game-function>
+    </div>
+    <aside id="aside">
+    <leaderboard-form/>
+    <leaderboard-item :leaderboards="leaderboards"/>
+    </aside> 
   </div>
 </template>
 
 <script>
 import { eventBus } from './main'
 import Game from './components/GameFunction'
+import LeaderBoardForm from './components/LeaderBoardForm'
+import LeaderBoardItem from './components/LeaderBoardItem.vue';
+import GameService from './services/GameService'
    var tableRow = document.getElementsByTagName('tr');
     var tableCell = document.getElementsByTagName('td');
     var tableSlot =  document.querySelector('.slot');
     var playerTurn = document.querySelector('.player-turn');
     var reset = document.querySelector('.reset')
     var currentPlayer = 1;
-    var player1Color = 'red'
-    var player2Color = 'yellow'
+    var player1Color = 'green'
+    var player2Color = 'red'
     var fullSlot = []
     
 export default {
   data(){
     return {
-    playerOne:"",
-    playerTwo:"",
+    players: 0,
+    playerOne:null,
+    playerTwo:null,
+    leaderboards: []
     }
   },
   name: 'App',
   components: {
     "game-function":Game,
+    "leaderboard-form": LeaderBoardForm,
+    "leaderboard-item": LeaderBoardItem
   },
+
+
   mounted(){
-    //Get Saved Player and Game Details.
-    // this.getGames();
-    // this.getPlayers();
+    this.fetchPlayers();
     eventBus.$on('listen', event => this.changeColor(event));
-  },
+    eventBus.$on('create-player', (player) => {
+      GameService.postPlayer(player)
+        .then(player => this.leaderboards.push(player));
+    });
+    eventBus.$on('player-selected', (player) => {
+      if (this.playerOne !== null){
+        this.playerTwo = player}
+        else{
+          this.playerOne = player}
+      });
+      // this.player = player
+      // console.log(this.player)
+    },
+  
   methods: {
+    fetchPlayers() {
+    GameService.getPlayer()
+    .then(players => this.leaderboards = players);
+    },
+
     changeColor:  function(event){
-    console.log("changeColor")
-    console.log(event)
-    console.log(`${event.target.parentElement.rowIndex}, ${event.target.cellIndex}`)
     let column = event.target.cellIndex;
     let row = []
       for (let i = 5; i > -1; i--){
         if (tableRow[i].children[column].style.backgroundColor === 'white'){
           row.push(tableRow[i].children[column])
             if (currentPlayer === 1){
-              console.log(row)
-              console.log(currentPlayer)
-              console.log(this.playerOne)
               row[0].style.backgroundColor = player1Color
               if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return this.$alert(`${this.playerOne} is the Winner!!! `);
+                this.playerWin(this.playerOne)
+                return this.$alert(`${this.playerOne.name} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   return this.$alert(`The Game is a draw!!!`)
@@ -66,11 +93,10 @@ export default {
         return currentPlayer = 2
                 }
           else {
-            console.log(row)
-            console.log(currentPlayer)
             row[0].style.backgroundColor = player2Color
             if (this.horizontalCheck() || this.verticalCheck() || this.diagonalCheckOne() || this.diagonalCheckTwo()){
-                return this.$alert(`${this.playerTwo} is the Winner!!! `);
+              this.playerWin(this.playerTwo)
+                return this.$alert(`${this.playerTwo.name} is the Winner!!! `);
                 } 
                 else if(this.drawCheck()){
                   return this.$alert(`The Game is a draw!!!`)
@@ -82,10 +108,20 @@ export default {
         }
       }
     },
+
+    playerWin: function(player){
+      player.wins = player.wins +=1
+      console.log(player.wins)
+      console.log(player)
+      GameService.updatePlayer(player)
+
+
+    },
   
     colorMatchCheck: function(one, two, three, four){
       return(one === two && one === three && one === four && one !== "white")
     },
+
     horizontalCheck: function(){
       for (let row=0; row < tableRow.length; row++){
         for (let col = 0; col<4; col++){
@@ -98,6 +134,7 @@ export default {
         }
       }
     },
+
     verticalCheck: function(){
       for(let col=0; col< 7; col++){
         for(let row=0;  row<3; row ++){
@@ -110,6 +147,7 @@ export default {
         }
       }
     },
+
     diagonalCheckOne: function(){
       for(let col=0; col<4; col++){
         for(let row=0; row<3; row++){
@@ -122,6 +160,7 @@ export default {
         }
       }
     },
+
     diagonalCheckTwo: function(){
       for(let col=0; col<4; col++){
         for(let row=5; row>2; row--){
@@ -134,6 +173,7 @@ export default {
         }
       }
     },
+
     drawCheck: function(){
       for(let i=0; i < tableCell.length; i++){
         if(tableCell[i].style.backgroundColor !=='white'){
@@ -145,17 +185,30 @@ export default {
           }
         }
       }
-    },
-  }
+    }
+}
 </script>
 
 <style>
+li{
+  list-style-type: none;
+  font-weight: 900;
+}
+#aside{
+  height: 50px;
+  text-align: left;
+  align-items: left;
+  
+}
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-image: url('~@/assets/c4_starwars.jpg');
+  background-image: url('~@/assets/yodaCrop.png'), url('~@/assets/DarthCrop.png');
+  background-position: top left , top right;
+  background-size: 50%, 50%;
+  background-repeat: no-repeat, no-repeat;
   width: 100vw;
 }
 
@@ -165,10 +218,10 @@ body {
   box-sizing: border-box;
 }
 
-h1 {
-  color: black;
+h1, h2, #vs, #aside {
+  color: whitesmoke;
   text-align: center;
-  text-shadow: 0 0 3px rgb(96, 96, 253);;
+  text-shadow: 0 0 3px rgb(96, 96, 253);
 }
 
 .player-names {
@@ -183,7 +236,6 @@ h1 {
   justify-content: space-around;
   width: 650px;
   height: 600px;
-  background: rgb(96, 96, 253);
   box-shadow: 10px 10px 20px black;
   padding: 1.5rem;
   border-radius: 1.5%;
@@ -199,10 +251,6 @@ h1 {
   border-color: black;
   border-radius: 50%;
   transition-duration: 0.4s;
-}
-
-.slot:hover {
-  background-color: lightslategrey;
 }
 
 input[type=text] {
@@ -242,11 +290,11 @@ input[type=text] {
 }
 
 #p1 {
-  color: rgb(212, 23, 23);
+  color: lightgreen;
 }
 
 #p2 {
-  color: rgb(255, 255, 0);
+  color: red;
 }
 
 #dragtarget-red{
@@ -272,9 +320,31 @@ input[type=text] {
 
 #red{
   order: -1;
+  margin: 0px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  /* margin: 0 auto; */
+}
+
+#red:hover {
+  transform: scale(2.0);
 }
 
 #yellow {
   order: 2;
+  margin: 0px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  /* margin: 0 auto; */
+}
+
+#yellow:hover {
+  transform: scale(2.0); 
+}
+
+#create {
+  margin: 15px;
 }
 </style>

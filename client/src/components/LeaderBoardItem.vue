@@ -1,18 +1,35 @@
 <template lang="html">
 	<div id="leaderboard-list">
-		<h2>Players</h2>
+		<h2>LeaderBoard</h2>
 		<ul>
-			<li v-for="leaderboard in leaderboards">{{ leaderboard.name }} wins: {{ leaderboard.wins }} 
-                losses: {{ leaderboard.losses }}
-            </li>
+			<list-item :leaderboards="leaderboards" v-for="(player,index) in leaderboards" :player="player" :key="index"></list-item>
+			<!-- <input type="submit" name="leaders" value="leaders" v-onClick="sortLeader()" /> -->
 		</ul>
 	</div>
 </template>
 
 <script>
+import { eventBus } from '@/main';
+import LeaderBoardPlayer from './LeaderBoardPlayer'
+
+// const wins = [];
+// document.getElementById("player").innerHTML = wins;
+
 export default {
 	name: "leaderboard-list",
-	props: ["leaderboards"]
+	props: ["leaderboards"],
+	
+	components:{
+		'list-item': LeaderBoardPlayer
+	},
+	// methods: {
+	// 	sortLeader: function() {
+  	// 		// wins.sort(function(a, b){return a-b});
+  	// 		wins.sort((a, b) => a - b);
+  	// 		document.getElementById("player").innerHTML = wins;
+	// 	}
+	// }
+	
 }
 </script>
 
