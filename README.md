@@ -51,3 +51,11 @@ npm run test:e2e
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Have a quick look below at how the game changed over time from its inception:
+
+<img width="1440" alt="board 1" src="https://user-images.githubusercontent.com/64153997/104184815-f3683b80-540b-11eb-9a1a-c850610c9b87.png">
+
+<img width="1440" alt="board 3" src="https://user-images.githubusercontent.com/64153997/104184819-f531ff00-540b-11eb-8ad4-33905a0cdfce.png">
+
+<img width="1440" alt="board 5" src="https://user-images.githubusercontent.com/64153997/104184820-f7945900-540b-11eb-8445-d0c45f0eebdc.png">
