@@ -6,11 +6,16 @@ Clone the repository. To clone this repo please follow the instructions found in
 
 Download and install Express Download and install MongoDB
 
-Within your terminal navigate to: ..c4_game/server Enter: npm install Enter: npm run seeds //this will pre-populate players Once complete Enter npm run server:dev //this will run the MongoDB Server
+Within your terminal navigate to: ..c4_game/server
+Enter: npm install Enter: npm run seeds (this will pre-populate players)
+Once complete Enter npm run server:dev (this will run the MongoDB Server)
 
-Open a new Terminal and navigate to: ..c4_game/client Enter: npm run serve //this will run the Express Front End
+Open a new Terminal and navigate to: ..c4_game/client 
+Enter: npm run serve (this will run the Express Front End)
 
 Open Browser and navigate to URL:localhost:8080
+
+Now play the game & enjoy yourself!
 
 Technologies and Tools used:
 
