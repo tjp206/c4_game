@@ -18,7 +18,9 @@ Enter: npm run serve (this will run the Express Front End)
 
 Open a new browser window & navigate to URL:localhost:8080
 
-Now play the game & enjoy yourself!
+To play the game, drag & drop the Imperial & Rebel tokens to their desired location on the board.
+
+Now play the game & enjoy yourself, but don't fall victim to the Dark Side!
 
 Technologies used:
 
