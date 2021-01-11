@@ -2,7 +2,8 @@
 
 To run the code found in this repository:
 
-Clone the repository. To clone this repo please follow the instructions found in the github.com link: https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository
+Clone the repository:
+To clone this repo please follow the instructions found in the github.com link: https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository
 
 Download & install Express
 Download & install MongoDB
